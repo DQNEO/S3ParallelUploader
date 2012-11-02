@@ -30,21 +30,12 @@ public class ConcurrentSample {
         int count_success = 0;
         int count_failure = 0;
 
-        AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
-        		ConcurrentSample.class
-                        .getResourceAsStream("AwsCredentials.properties")));
-
-        s3.setEndpoint("https://s3-ap-northeast-1.amazonaws.com");
-
-        String bucket = "my-first-s3-bucket-" + UUID.randomUUID();
-        String key = "file-";
-
-        s3.createBucket(bucket);
-
+        String bucket = getBucket();
         Collection<S3UploadTask> collection = new ArrayList<S3UploadTask>();
+
         for (int i = 0; i < CLIENTS; i++) {
-            S3UploadTask task = new S3UploadTask(bucket, key
-                    + UUID.randomUUID());
+            String uniqueKey = "file-" + UUID.randomUUID();
+            S3UploadTask task = new S3UploadTask(bucket, uniqueKey);
             collection.add(task);
         }
 
@@ -67,7 +58,22 @@ public class ConcurrentSample {
             executorPool.shutdown();
         }
     }
+
+    private static String getBucket() throws IOException {
+        AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
+        		ConcurrentSample.class
+                        .getResourceAsStream("AwsCredentials.properties")));
+
+        s3.setEndpoint("https://s3-ap-northeast-1.amazonaws.com");
+
+        String bucket = "my-first-s3-bucket-" + UUID.randomUUID();
+        s3.createBucket(bucket);
+    	return bucket;
+    }
+
 }
+
+
 
 
 class S3UploadTask implements Callable<Boolean> {
