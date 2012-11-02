@@ -3,3 +3,4 @@
 .settings
 bin
 src/sample/AwsCredentials.properties
+src/main/AwsCredentials.properties
