@@ -52,7 +52,10 @@ public class ConcurrentSample {
             List<Future<Boolean>> list = executorPool.invokeAll(collection);
             for (Future<Boolean> fut : list) {
                 int ignore = fut.get() ? success++ : failure++;
+                System.out.println("ignore  - " + ignore);
+
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
