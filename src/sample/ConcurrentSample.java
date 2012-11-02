@@ -37,7 +37,7 @@ public class ConcurrentSample {
         s3.setEndpoint("https://s3-ap-northeast-1.amazonaws.com");
 
         String bucket = "my-first-s3-bucket-" + UUID.randomUUID();
-        String key = "MyObjectKey";
+        String key = "file-";
 
         s3.createBucket(bucket);
 
