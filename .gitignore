@@ -2,4 +2,4 @@
 .project
 .settings
 bin
-src/AwsCredentials.properties
+src/sample/AwsCredentials.properties
