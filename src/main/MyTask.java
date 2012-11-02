@@ -1,6 +1,5 @@
 package main;
 
-import java.io.File;
 import java.util.concurrent.Callable;
 
 import com.amazonaws.services.s3.AmazonS3;
