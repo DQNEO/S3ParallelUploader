@@ -43,9 +43,9 @@ public class Uploader {
         Collection<MyTask> collection = new ArrayList<MyTask>();
 
 
+        int index = 1;
         for(File file :files) {
-            MyTask myTask = new MyTask(s3, bucketName, file);
-            collection.add(myTask);
+            collection.add( new MyTask(s3, bucketName, file, index++));
 		}
 
 
