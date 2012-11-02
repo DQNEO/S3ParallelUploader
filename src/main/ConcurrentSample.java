@@ -27,23 +27,39 @@ public class ConcurrentSample {
 
     private static final ExecutorService executorPool = Executors.newFixedThreadPool(NUM_THREADS);
 
-    public static void main(String[] args) throws IOException {
-    	upload();
+    public static void main(String[] args) throws Exception {
+
+		ArrayList<File> files = FileFinder.find(args[0]);
+		System.out.println("===== files foud ========");
+		for(File f :files) {
+        	System.out.println(f);
+        }
+
+		upload(files);
     }
 
-    public static void upload() throws IOException {
+    public static void upload(ArrayList<File> files) throws Exception {
     	int count_success = 0;
         int count_failure = 0;
 
-        String bucket = getBucket();
+        AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
+        		ConcurrentSample.class
+                        .getResourceAsStream("../sample/AwsCredentials.properties")));
+
+        s3.setEndpoint("https://s3-ap-northeast-1.amazonaws.com");
+        String bucket = bucketName;
         Collection<MyTask> collection = new ArrayList<MyTask>();
 
         for (int i = 0; i < NUM_TASKS; i++) {
-            String uniqueKey = "file-" + UUID.randomUUID();
-            MyTask myTask = new MyTask(bucket, uniqueKey);
-            collection.add(myTask);
         }
 
+        for(File f :files) {
+            MyTask myTask = new MyTask(s3, bucket, f);
+            collection.add(myTask);
+		}
+
+
+		System.out.println("===== Start uploading ========");
         long startTime = System.currentTimeMillis();
 
         try {
@@ -58,6 +74,7 @@ public class ConcurrentSample {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw e;
         } finally {
         	long elapsedTime = (System.currentTimeMillis() - startTime);
 
@@ -67,17 +84,6 @@ public class ConcurrentSample {
 
             executorPool.shutdown();
         }
-    }
-
-    private static String getBucket() throws IOException {
-        AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
-        		ConcurrentSample.class
-                        .getResourceAsStream("../sample/AwsCredentials.properties")));
-
-        s3.setEndpoint("https://s3-ap-northeast-1.amazonaws.com");
-
-        s3.createBucket(bucketName);
-    	return bucketName;
     }
 
 }
