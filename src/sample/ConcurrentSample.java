@@ -20,41 +20,46 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 
 public class ConcurrentSample {
 
-    private static final int CLIENTS = 100;
-    private static final int THREADS = 100;
+    private static final int NUM_TASKS = 100;
+    private static final int NUM_THREADS = 100;
 
     private static final ExecutorService executorPool = Executors
-            .newFixedThreadPool(THREADS);
+            .newFixedThreadPool(NUM_THREADS);
 
     public static void main(String[] args) throws IOException {
         int count_success = 0;
         int count_failure = 0;
 
         String bucket = getBucket();
-        Collection<S3UploadTask> collection = new ArrayList<S3UploadTask>();
+        Collection<MyTask> collection = new ArrayList<MyTask>();
 
-        for (int i = 0; i < CLIENTS; i++) {
+        for (int i = 0; i < NUM_TASKS; i++) {
             String uniqueKey = "file-" + UUID.randomUUID();
-            S3UploadTask task = new S3UploadTask(bucket, uniqueKey);
-            collection.add(task);
+            MyTask myTask = new MyTask(bucket, uniqueKey);
+            collection.add(myTask);
         }
 
         long startTime = System.currentTimeMillis();
+
         try {
             List<Future<Boolean>> list = executorPool.invokeAll(collection);
             for (Future<Boolean> fut : list) {
-                int ignore = fut.get() ? count_success++ : count_failure++;
-                System.out.println("ignore  - " + ignore);
-
+                if(fut.get()) {
+                	count_success++;
+                } else {
+                	count_failure++;
+                }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            System.out.println("TOTAL SUCCESS - " + count_success);
+        	long elapsedTime = (System.currentTimeMillis() - startTime);
+
+        	System.out.println("TOTAL SUCCESS - " + count_success);
             System.out.println("TOTAL FAILURE - " + count_failure);
-            System.out.println("Total time - "
-                    + (System.currentTimeMillis() - startTime) + " ms");
+            System.out.println("Total time - "    + elapsedTime + " ms");
+
             executorPool.shutdown();
         }
     }
@@ -76,11 +81,11 @@ public class ConcurrentSample {
 
 
 
-class S3UploadTask implements Callable<Boolean> {
+class MyTask implements Callable<Boolean> {
     private String bucket = null;
     private String key = null;
 
-    public S3UploadTask(String bucket, String key) {
+    public MyTask(String bucket, String key) {
         this.bucket = bucket;
         this.key = key;
     }
@@ -89,11 +94,11 @@ class S3UploadTask implements Callable<Boolean> {
     public Boolean call() {
         try {
             AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
-                    S3UploadTask.class
+                    MyTask.class
                             .getResourceAsStream("AwsCredentials.properties")));
 
             s3.putObject(new PutObjectRequest(bucket, key, createSampleFile()));
-
+            System.out.println(key);
             return true;
         } catch (Exception e) {
             return false;
