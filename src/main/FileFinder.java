@@ -13,15 +13,21 @@ public class FileFinder {
 
 	private static ArrayList<File> files = new ArrayList<File>();
 
+	/**
+	 * find files recursively
+	 *
+	 * @param path directory
+	 * @return ArrayList<File> file list
+	 */
 	public static  ArrayList<File> find(String path) {
 		_find(path);
 		return files;
 	}
 
 	/**
-	 * 引数で渡されたディレクトリ以下を再帰的に検索します。
+	 * find files recursively
 	 *
-	 * @param path ディレクトリパス
+	 * @param path directory
 	 * @return bool isFile
 	 */
 	private static boolean _find(String path) {
@@ -31,22 +37,18 @@ public class FileFinder {
 
 			@Override
 			public boolean accept(File dir, String name) {
-				// ドットで始まるファイルは対象外
+				// exclude dot files
 				if (name.startsWith(".")) {
 					return false;
 				}
-				// クラスファイルは対象外
-				if (name.endsWith(".class")) {
-					return false;
-				}
-				// 対象要素の絶対パスを取得
+
 				String absolutePath = dir.getAbsolutePath()
 										+ File.separator + name;
 				if (new File(absolutePath).isFile()) {
 					return true;
 				}
 				else {
-					// ディレクトリの場合、再び同一メソッドを呼出す。
+					// recursive call
 					return _find(absolutePath);
 				}
 			}
