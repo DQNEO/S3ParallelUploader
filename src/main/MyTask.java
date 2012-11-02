@@ -19,15 +19,11 @@ public class MyTask implements Callable<Boolean> {
     }
 
     @Override
-    public Boolean call() throws Exception {
-        try {
-            s3.putObject(new PutObjectRequest(bucket, file.getAbsolutePath(), file));
-            System.out.println(file);
-            return true;
-        } catch (Exception e) {
-            //return false;
-        	throw e;
-        }
+    public Boolean call() {
+    	String key = file.getAbsolutePath();
+        s3.putObject(new PutObjectRequest(bucket, key, file));
+        System.out.println("Key:" + key + "\tFile:" +  file);
+        return true;
     }
 }
 

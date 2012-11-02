@@ -17,7 +17,7 @@ public class Uploader {
     private static final int NUM_THREADS = 10;
 
     private static String bucketName = "my-first-s3-bucket-hogehogefoobar";
-
+    private static String endpoint = "https://s3-ap-northeast-1.amazonaws.com";
 
     private static final ExecutorService executorPool = Executors.newFixedThreadPool(NUM_THREADS);
 
@@ -25,8 +25,8 @@ public class Uploader {
 
 		ArrayList<File> files = FileFinder.find(args[0]);
 		System.out.println("===== files foud ========");
-		for(File f :files) {
-        	System.out.println(f);
+		for(File file :files) {
+        	System.out.println(file);
         }
 
 		uploadFiles(files);
@@ -40,15 +40,15 @@ public class Uploader {
         		Uploader.class
                         .getResourceAsStream("../sample/AwsCredentials.properties")));
 
-        s3.setEndpoint("https://s3-ap-northeast-1.amazonaws.com");
+        s3.setEndpoint(endpoint);
         String bucket = bucketName;
         Collection<MyTask> collection = new ArrayList<MyTask>();
 
         for (int i = 0; i < NUM_TASKS; i++) {
         }
 
-        for(File f :files) {
-            MyTask myTask = new MyTask(s3, bucket, f);
+        for(File file :files) {
+            MyTask myTask = new MyTask(s3, bucket, file);
             collection.add(myTask);
 		}
 
