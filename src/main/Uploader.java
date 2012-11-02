@@ -20,9 +20,13 @@ public class Uploader {
 
     private static final ExecutorService executorPool = Executors.newFixedThreadPool(NUM_THREADS);
 
+
     public static void main(String[] args) throws Exception {
 
     	File baseDir = checkBaseDir(args[0]);
+
+    	//maybe we don't need this
+		//System.setProperty("user.dir", baseDir.toString());
 
 		ArrayList<File> files = FileFinder.find(baseDir.getPath());
 		System.out.println("===== files foud ========");
@@ -30,7 +34,7 @@ public class Uploader {
         	System.out.println(file);
         }
 
-		uploadFiles(files);
+		uploadFiles(baseDir, files);
     }
 
     private static File checkBaseDir(String path) throws Exception {
@@ -41,7 +45,7 @@ public class Uploader {
     	return dir;
     }
 
-    public static void uploadFiles(ArrayList<File> files) throws Exception {
+    public static void uploadFiles(File baseDir, ArrayList<File> files) throws Exception {
     	int count_success = 0;
         int count_failure = 0;
 
@@ -55,7 +59,7 @@ public class Uploader {
 
         int index = 1;
         for(File file :files) {
-            collection.add( new MyTask(s3, bucketName, file, index++));
+            collection.add( new MyTask(s3, bucketName, new MyFile(baseDir, file), index++));
 		}
 
 
