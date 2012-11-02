@@ -11,7 +11,7 @@ import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
-public class ConcurrentSample {
+public class Uploader {
 
     private static final int NUM_TASKS = 10;
     private static final int NUM_THREADS = 10;
@@ -37,7 +37,7 @@ public class ConcurrentSample {
         int count_failure = 0;
 
         AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
-        		ConcurrentSample.class
+        		Uploader.class
                         .getResourceAsStream("../sample/AwsCredentials.properties")));
 
         s3.setEndpoint("https://s3-ap-northeast-1.amazonaws.com");
