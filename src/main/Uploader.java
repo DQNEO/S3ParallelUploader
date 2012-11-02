@@ -14,7 +14,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 public class Uploader {
 
     private static final int NUM_TASKS = 10;
-    private static final int NUM_THREADS = 10;
+    private static final int NUM_THREADS = 100;
 
     private static String bucketName = "my-first-s3-bucket-hogehogefoobar";
     private static String endpoint = "https://s3-ap-northeast-1.amazonaws.com";
