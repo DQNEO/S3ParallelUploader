@@ -22,9 +22,8 @@ public class FileFinderTest {
 
 	@Test
 	public void test() {
-		FileFinder2 finder = new FileFinder2();
-		ArrayList<File> files = finder.getAllFiles(new File("C:/z/pleiades/workspace/S3ParallelUploader/testdirs/a"));
-		assertThat(files.size()   , is(1));
+		ArrayList<File> files = FileFinder.find("C:/z/pleiades/workspace/S3ParallelUploader/testdirs/a");
+		assertThat(files.size()   , is(2));
 	}
 
 }
