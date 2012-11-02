@@ -24,7 +24,8 @@ public class MyTask implements Callable<Boolean> {
     public Boolean call() {
     	String key = file.getAbsolutePath();
         s3.putObject(new PutObjectRequest(bucket, key, file));
-        System.out.println("Key:" + key + " <= File:" +  file);
+
+        System.out.printf("[%d] Key: %s <= File: %s\n",  index, key, file);
         return true;
     }
 }

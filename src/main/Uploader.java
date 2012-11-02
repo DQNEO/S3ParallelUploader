@@ -22,13 +22,23 @@ public class Uploader {
 
     public static void main(String[] args) throws Exception {
 
-		ArrayList<File> files = FileFinder.find(args[0]);
+    	File baseDir = checkBaseDir(args[0]);
+
+		ArrayList<File> files = FileFinder.find(baseDir.getPath());
 		System.out.println("===== files foud ========");
 		for(File file :files) {
         	System.out.println(file);
         }
 
 		uploadFiles(files);
+    }
+
+    private static File checkBaseDir(String path) throws Exception {
+    	File dir  =new File(path);
+    	if (!  dir.isDirectory()) {
+    		throw new Exception("directory not found:" + path);
+    	}
+    	return dir;
     }
 
     public static void uploadFiles(ArrayList<File> files) throws Exception {
