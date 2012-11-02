@@ -29,10 +29,10 @@ public class Uploader {
         	System.out.println(f);
         }
 
-		upload(files);
+		uploadFiles(files);
     }
 
-    public static void upload(ArrayList<File> files) throws Exception {
+    public static void uploadFiles(ArrayList<File> files) throws Exception {
     	int count_success = 0;
         int count_failure = 0;
 
