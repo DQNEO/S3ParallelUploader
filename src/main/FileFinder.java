@@ -11,6 +11,9 @@ import java.util.ArrayList;
 public class FileFinder {
 
 
+	/**
+	 *  holds all files' absolute path
+	 */
 	private static ArrayList<File> files = new ArrayList<File>();
 
 	/**
