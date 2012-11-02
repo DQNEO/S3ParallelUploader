@@ -29,11 +29,11 @@ public class Uploader {
 		//System.setProperty("user.dir", baseDir.toString());
 
 		ArrayList<File> files = FileFinder.find(baseDir.getPath());
-		System.out.println("===== files foud ========");
 		for(File file :files) {
         	System.out.println(file);
         }
 
+		System.out.printf("===== [%d] files foud ========\n", files.size());
 		uploadFiles(baseDir, files);
     }
 
@@ -82,9 +82,11 @@ public class Uploader {
         } finally {
         	long elapsedTime = (System.currentTimeMillis() - startTime);
 
+            System.out.println("Number of threas - "    + NUM_THREADS);
         	System.out.println("TOTAL SUCCESS - " + count_success);
             System.out.println("TOTAL FAILURE - " + count_failure);
             System.out.println("Total time - "    + elapsedTime + " ms");
+            System.out.println("Time per file - " + ( elapsedTime / files.size()));
 
             executorPool.shutdown();
         }
