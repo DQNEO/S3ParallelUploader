@@ -13,7 +13,6 @@ import com.amazonaws.services.s3.AmazonS3Client;
 
 public class Uploader {
 
-    private static final int NUM_TASKS = 10;
     private static final int NUM_THREADS = 100;
 
     private static String bucketName = "my-first-s3-bucket-hogehogefoobar";
@@ -41,14 +40,11 @@ public class Uploader {
                         .getResourceAsStream("../sample/AwsCredentials.properties")));
 
         s3.setEndpoint(endpoint);
-        String bucket = bucketName;
         Collection<MyTask> collection = new ArrayList<MyTask>();
 
-        for (int i = 0; i < NUM_TASKS; i++) {
-        }
 
         for(File file :files) {
-            MyTask myTask = new MyTask(s3, bucket, file);
+            MyTask myTask = new MyTask(s3, bucketName, file);
             collection.add(myTask);
 		}
 
