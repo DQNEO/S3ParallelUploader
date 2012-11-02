@@ -27,8 +27,8 @@ public class ConcurrentSample {
             .newFixedThreadPool(THREADS);
 
     public static void main(String[] args) throws IOException {
-        int success = 0;
-        int failure = 0;
+        int count_success = 0;
+        int count_failure = 0;
 
         AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
         		ConcurrentSample.class
@@ -52,7 +52,7 @@ public class ConcurrentSample {
         try {
             List<Future<Boolean>> list = executorPool.invokeAll(collection);
             for (Future<Boolean> fut : list) {
-                int ignore = fut.get() ? success++ : failure++;
+                int ignore = fut.get() ? count_success++ : count_failure++;
                 System.out.println("ignore  - " + ignore);
 
             }
@@ -60,8 +60,8 @@ public class ConcurrentSample {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            System.out.println("TOTAL SUCCESS - " + success);
-            System.out.println("TOTAL FAILURE - " + failure);
+            System.out.println("TOTAL SUCCESS - " + count_success);
+            System.out.println("TOTAL FAILURE - " + count_failure);
             System.out.println("Total time - "
                     + (System.currentTimeMillis() - startTime) + " ms");
             executorPool.shutdown();
