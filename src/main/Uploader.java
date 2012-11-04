@@ -15,18 +15,30 @@ public class Uploader {
 
     private static final int NUM_THREADS = 10;
 
-    private static String bucketName = "my-first-s3-bucket-hogehogefoobar";
     private static String endpoint = "https://s3-ap-northeast-1.amazonaws.com";
 
     private static final ExecutorService executorPool = Executors.newFixedThreadPool(NUM_THREADS);
 
+    private static AmazonS3 s3;
 
     public static void main(String[] args) throws Exception {
 
     	File baseDir = checkBaseDir(args[0]);
 
+	    if (args.length < 2 ||   args[1] == "") {
+	    	throw new IllegalArgumentException("bucketName is not given");
+	    }
+
+	    String bucketName = args[1];
     	//maybe we don't need this
 		//System.setProperty("user.dir", baseDir.toString());
+
+        s3 = new AmazonS3Client(new PropertiesCredentials(
+        		Uploader.class
+                        .getResourceAsStream("../sample/AwsCredentials.properties")));
+
+        s3.setEndpoint(endpoint);
+
 
 		ArrayList<File> files = FileFinder.find(baseDir);
 
@@ -38,7 +50,8 @@ public class Uploader {
         */
 
 		System.out.printf("===== [%d] files foud ========\n", files.size());
-		uploadFiles(baseDir, files);
+
+		uploadFiles(bucketName, baseDir, files);
     }
 
     private static File checkBaseDir(String path) throws Exception {
@@ -49,21 +62,16 @@ public class Uploader {
     	return dir;
     }
 
-    public static void uploadFiles(File baseDir, ArrayList<File> files) throws Exception {
+    public static void uploadFiles(String bucketName, File baseDir, ArrayList<File> files) throws Exception {
     	int count_success = 0;
         int count_failure = 0;
 
-        AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
-        		Uploader.class
-                        .getResourceAsStream("../sample/AwsCredentials.properties")));
-
-        s3.setEndpoint(endpoint);
         Collection<MyTask> collection = new ArrayList<MyTask>();
 
 
         int index = 1;
         for(File file :files) {
-            collection.add( new MyTask(new MyFile(s3, bucketName, baseDir, file), index++));
+            collection.add(new MyTask(new MyFile(s3, bucketName, baseDir, file), index++));
 		}
 
 
