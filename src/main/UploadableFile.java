@@ -10,7 +10,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
  * @author DQNEO
  *
  */
-public class MyFile extends File {
+public class UploadableFile extends File {
 
 	private AmazonS3 s3;
 
@@ -23,7 +23,7 @@ public class MyFile extends File {
 
 	private static final long serialVersionUID = 1L;
 
-	public MyFile(AmazonS3 s3, String bucket, File baseDir, File file) {
+	public UploadableFile(AmazonS3 s3, String bucket, File baseDir, File file) {
 		super(file.getAbsolutePath());
 
 		this.s3 = s3;

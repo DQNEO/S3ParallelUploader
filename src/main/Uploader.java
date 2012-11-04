@@ -13,7 +13,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 
 public class Uploader {
 
-    private static final int NUM_THREADS = 10;
+    private static final int NUM_THREADS = 100;
 
     private static String endpoint = "https://s3-ap-northeast-1.amazonaws.com";
 
@@ -73,7 +73,7 @@ public class Uploader {
 
         int index = 1;
         for(File file :files) {
-            collection.add(new MyTask(new MyFile(s3, bucketName, baseDir, file), index++));
+            collection.add(new MyTask(new UploadableFile(s3, bucketName, baseDir, file), index++));
 		}
 
 		System.out.println("===== Start uploading ========");

@@ -78,7 +78,7 @@ import com.amazonaws.services.s3.model.UploadPartRequest;
 import com.amazonaws.services.s3.model.UploadPartResult;
 import com.amazonaws.services.s3.model.VersionListing;
 
-public class MyFileTest {
+public class UploadableFileTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -90,23 +90,23 @@ public class MyFileTest {
 
 	@Test
 	public void test() {
-		MyFile myFile1 = new MyFile(null, null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\foo\\file.txt"));
+		UploadableFile myFile1 = new UploadableFile(null, null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\foo\\file.txt"));
 		assertThat(myFile1.getS3Key(), is("foo/file.txt"));
 
-		MyFile myFile2 = new MyFile(null, null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\bar\\file.txt"));
+		UploadableFile myFile2 = new UploadableFile(null, null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\bar\\file.txt"));
 		assertThat(myFile2.getS3Key(), is("bar/file.txt"));
 
-		MyFile myFile3 = new MyFile(null, null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\file.txt"));
+		UploadableFile myFile3 = new UploadableFile(null, null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\file.txt"));
 		assertThat(myFile3.getS3Key(), is("file.txt"));
 	}
 
 	@Test
 	public void upload() {
 		FakeAmazonS3 fakeAmazonS3 = new FakeAmazonS3();
-		MyFile myFile = new MyFile(fakeAmazonS3, "a", new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\foo\\file.txt"));
+		UploadableFile uploadableFile = new UploadableFile(fakeAmazonS3, "a", new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\foo\\file.txt"));
 		assertThat(fakeAmazonS3.hasPutObjectRequest, is(false));
 
-		myFile.upload();
+		uploadableFile.upload();
 		assertThat(fakeAmazonS3.hasPutObjectRequest, is(true));
 	}
 
