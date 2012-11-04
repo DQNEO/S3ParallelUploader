@@ -21,6 +21,10 @@ public class Uploader {
 
     private static AmazonS3 s3;
 
+    private static int count_success = 0;
+    private static int count_failure = 0;
+
+
     public static void main(String[] args) throws Exception {
 
     	File baseDir = checkBaseDir(args[0]);
@@ -63,8 +67,6 @@ public class Uploader {
     }
 
     public static void uploadFiles(String bucketName, File baseDir, ArrayList<File> files) throws Exception {
-    	int count_success = 0;
-        int count_failure = 0;
 
         Collection<MyTask> collection = new ArrayList<MyTask>();
 
@@ -74,9 +76,8 @@ public class Uploader {
             collection.add(new MyTask(new MyFile(s3, bucketName, baseDir, file), index++));
 		}
 
-
 		System.out.println("===== Start uploading ========");
-        long startTime = System.currentTimeMillis();
+		Timer timer = new Timer();
 
         try {
             List<Future<Boolean>> list = executorPool.invokeAll(collection);
@@ -92,7 +93,7 @@ public class Uploader {
             e.printStackTrace();
             throw e;
         } finally {
-        	long elapsedTime = (System.currentTimeMillis() - startTime);
+        	long elapsedTime = timer.getElapsedTime();
 
             System.out.println("Number of threas - "    + NUM_THREADS);
         	System.out.println("TOTAL SUCCESS - " + count_success);
