@@ -1,4 +1,4 @@
-package sample;
+package jp.dqneo.amazons3.sample;
 /*
  * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -67,7 +67,7 @@ public class S3TransferProgressSample {
         // single instance and share it throughout our application.
         tx = new TransferManager(credentials);
 
-        bucketName = "s3-transfer-progress-sample-" + credentials.getAWSAccessKeyId().toLowerCase();
+        bucketName = "s3-transfer-progress-jp.dqneo.amazons3.sample-" + credentials.getAWSAccessKeyId().toLowerCase();
 
         new S3TransferProgressSample();
     }

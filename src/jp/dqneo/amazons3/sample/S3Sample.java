@@ -1,4 +1,4 @@
-package sample;
+package jp.dqneo.amazons3.sample;
 /*
  * Copyright 2010-2012 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -28,7 +28,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 /**
- * This sample demonstrates how to make basic requests to Amazon S3 using
+ * This jp.dqneo.amazons3.sample demonstrates how to make basic requests to Amazon S3 using
  * the AWS SDK for Java.
  * <p>
  * <b>Prerequisites:</b> You must have a valid Amazon Web Services developer
@@ -37,7 +37,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
  * <p>
  * <b>Important:</b> Be sure to fill in your AWS access credentials in the
  *                   AwsCredentials.properties file before you try to run this
- *                   sample.
+ *                   jp.dqneo.amazons3.sample.
  * http://aws.amazon.com/security-credentials
  */
 public class S3Sample {
@@ -46,7 +46,7 @@ public class S3Sample {
         /*
          * Important: Be sure to fill in your AWS access credentials in the
          *            AwsCredentials.properties file before you try to run this
-         *            sample.
+         *            jp.dqneo.amazons3.sample.
          * http://aws.amazon.com/security-credentials
          */
         AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(

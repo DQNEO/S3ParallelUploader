@@ -1,4 +1,4 @@
-package main;
+package jp.dqneo.amazons3;
 
 import java.io.File;
 

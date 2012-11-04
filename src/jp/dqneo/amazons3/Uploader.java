@@ -1,4 +1,4 @@
-package main;
+package jp.dqneo.amazons3;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,7 +12,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
 /**
- * main class of Uploader
+ * jp.dqneo.amazons3 class of Uploader
  *
  */
 public class Uploader {
@@ -45,7 +45,7 @@ public class Uploader {
 
         s3 = new AmazonS3Client(new PropertiesCredentials(
                 Uploader.class
-                        .getResourceAsStream("../sample/AwsCredentials.properties")));
+                        .getResourceAsStream("AwsCredentials.properties")));
 
         s3.setEndpoint(endpoint);
 

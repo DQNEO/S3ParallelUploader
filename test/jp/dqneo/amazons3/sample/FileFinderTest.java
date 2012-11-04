@@ -1,10 +1,12 @@
-package main;
+package jp.dqneo.amazons3.sample;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import jp.dqneo.amazons3.FileFinder;
 
 import org.junit.After;
 import org.junit.Before;

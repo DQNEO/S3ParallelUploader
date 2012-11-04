@@ -2,5 +2,5 @@
 .project
 .settings
 bin
-src/sample/AwsCredentials.properties
-src/main/AwsCredentials.properties
+src/jp/dqneo/amazons3/sample/AwsCredentials.properties
+src/jp/dqneo/amazons3/AwsCredentials.properties

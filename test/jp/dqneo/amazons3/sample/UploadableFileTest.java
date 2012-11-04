@@ -1,4 +1,4 @@
-package main;
+package jp.dqneo.amazons3.sample;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+
+import jp.dqneo.amazons3.UploadableFile;
 
 import org.junit.After;
 import org.junit.Before;
