@@ -18,8 +18,8 @@ public class FileFinder {
 	 * @param path directory
 	 * @return ArrayList<File> file list
 	 */
-	public static  ArrayList<File> find(String path) {
-		_find(path);
+	public static  ArrayList<File> find(File dir) {
+		_find(dir.getPath());
 		return files;
 	}
 

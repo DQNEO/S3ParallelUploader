@@ -28,10 +28,14 @@ public class Uploader {
     	//maybe we don't need this
 		//System.setProperty("user.dir", baseDir.toString());
 
-		ArrayList<File> files = FileFinder.find(baseDir.getPath());
+		ArrayList<File> files = FileFinder.find(baseDir);
+
+		//maybe we don't need this
+		/*
 		for(File file :files) {
         	System.out.println(file);
         }
+        */
 
 		System.out.printf("===== [%d] files foud ========\n", files.size());
 		uploadFiles(baseDir, files);

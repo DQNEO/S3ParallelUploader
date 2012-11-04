@@ -26,7 +26,7 @@ public class FileFinderTest {
 	public void test() {
 		String sCurrentDir = new File(".").getAbsolutePath();
 		String testBaseDir = sCurrentDir + "/" + testdir;
-		ArrayList<File> files = FileFinder.find(testBaseDir + "/a");
+		ArrayList<File> files = FileFinder.find(new File(testBaseDir + "/a"));
 		assertThat(files.size()   , is(4));
 		assertThat(files.get(0), is(new File(testBaseDir + "/a/b/c/1.txt")));
 		assertThat(files.get(1), is(new File(testBaseDir + "/a/b/c/2.txt")));
