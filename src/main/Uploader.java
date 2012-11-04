@@ -68,19 +68,19 @@ public class Uploader {
 
     public static void uploadFiles(String bucketName, File baseDir, ArrayList<File> files) throws Exception {
 
-        Collection<MyTask> collection = new ArrayList<MyTask>();
+        Collection<MyTask> tasks = new ArrayList<MyTask>();
 
 
         int index = 1;
         for(File file :files) {
-            collection.add(new MyTask(new UploadableFile(s3, bucketName, baseDir, file), index++));
+            tasks.add(new MyTask(new UploadableFile(s3, bucketName, baseDir, file), index++));
 		}
 
 		System.out.println("===== Start uploading ========");
 		Timer timer = new Timer();
 
         try {
-            List<Future<Boolean>> list = executorPool.invokeAll(collection);
+            List<Future<Boolean>> list = executorPool.invokeAll(tasks);
             for (Future<Boolean> fut : list) {
                 if(fut.get()) {
                 	count_success++;
