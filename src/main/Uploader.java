@@ -17,8 +17,6 @@ public class Uploader {
 
     private static String endpoint = "https://s3-ap-northeast-1.amazonaws.com";
 
-    private static final ExecutorService executorPool = Executors.newFixedThreadPool(NUM_THREADS);
-
     private static AmazonS3 s3;
 
     private static int count_success = 0;
@@ -79,8 +77,9 @@ public class Uploader {
 		System.out.println("===== Start uploading ========");
 		Timer timer = new Timer();
 
-        try {
-            List<Future<Boolean>> list = executorPool.invokeAll(tasks);
+        ExecutorService threadPool = Executors.newFixedThreadPool(NUM_THREADS);
+
+            List<Future<Boolean>> list = threadPool.invokeAll(tasks);
             for (Future<Boolean> fut : list) {
                 if(fut.get()) {
                 	count_success++;
@@ -89,10 +88,6 @@ public class Uploader {
                 }
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
         	long elapsedTime = timer.getElapsedTime();
 
             System.out.println("Number of threas - "    + NUM_THREADS);
@@ -101,8 +96,7 @@ public class Uploader {
             System.out.println("Total time - "    + elapsedTime + " ms");
             System.out.println("Time per file - " + ( elapsedTime / files.size()));
 
-            executorPool.shutdown();
-        }
+            threadPool.shutdown();
     }
 
 }
