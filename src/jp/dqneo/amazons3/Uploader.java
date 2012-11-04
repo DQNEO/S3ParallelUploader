@@ -12,7 +12,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
 /**
- * jp.dqneo.amazons3 class of Uploader
+ * main class of Uploader
  *
  */
 public class Uploader {
