@@ -2,12 +2,12 @@ package main;
 
 import java.util.concurrent.Callable;
 
-public class MyTask implements Callable<Boolean> {
+public class Task implements Callable<Boolean> {
 
     private UploadableFile file = null;
     private int index;
 
-    public MyTask(UploadableFile file, int index) {
+    public Task(UploadableFile file, int index) {
         this.file = file;
         this.index = index;
     }
