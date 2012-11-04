@@ -2,14 +2,14 @@ package main;
 
 public class Timer {
 
-	private long startTime;
+    private long startTime;
 
-	public Timer() {
-		startTime = System.currentTimeMillis();
-	}
+    public Timer() {
+        startTime = System.currentTimeMillis();
+    }
 
-	public long getElapsedTime() {
-		return (System.currentTimeMillis() - startTime);
-	}
+    public long getElapsedTime() {
+        return (System.currentTimeMillis() - startTime);
+    }
 
 }

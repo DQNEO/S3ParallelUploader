@@ -50,7 +50,7 @@ public class S3Sample {
          * http://aws.amazon.com/security-credentials
          */
         AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
-        		S3Sample.class.getResourceAsStream("AwsCredentials.properties")));
+                S3Sample.class.getResourceAsStream("AwsCredentials.properties")));
 
         s3.setEndpoint("https://s3-ap-northeast-1.amazonaws.com");
 
@@ -63,7 +63,7 @@ public class S3Sample {
 
         try {
 
-        	/*
+            /*
              * Upload an object to your bucket - You can easily upload a file to
              * S3, or upload directly an InputStream if you know the length of
              * the data in the stream. You can also specify your own metadata

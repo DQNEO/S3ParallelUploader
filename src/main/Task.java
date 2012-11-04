@@ -14,7 +14,7 @@ public class Task implements Callable<Boolean> {
 
     @Override
     public Boolean call() {
-    	file.upload();
+        file.upload();
         System.out.printf("[%d] %s <= %s\n",  index, file.getS3Key(), file);
         return true;
     }

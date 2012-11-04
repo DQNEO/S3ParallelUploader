@@ -12,26 +12,26 @@ import org.junit.Test;
 
 public class FileFinderTest {
 
-	static String testdir = "testdirs";
+    static String testdir = "testdirs";
 
-	@Before
-	public void setUp() throws Exception {
-	}
+    @Before
+    public void setUp() throws Exception {
+    }
 
-	@After
-	public void tearDown() throws Exception {
-	}
+    @After
+    public void tearDown() throws Exception {
+    }
 
-	@Test
-	public void test() {
-		String sCurrentDir = new File(".").getAbsolutePath();
-		String testBaseDir = sCurrentDir + "/" + testdir;
-		ArrayList<File> files = FileFinder.find(new File(testBaseDir + "/a"));
-		assertThat(files.size()   , is(4));
-		assertThat(files.get(0), is(new File(testBaseDir + "/a/b/c/1.txt")));
-		assertThat(files.get(1), is(new File(testBaseDir + "/a/b/c/2.txt")));
-		assertThat(files.get(2), is(new File(testBaseDir + "/a/b/1.txt")));
-		assertThat(files.get(3), is(new File(testBaseDir + "/a/b/2.txt")));
-	}
+    @Test
+    public void test() {
+        String sCurrentDir = new File(".").getAbsolutePath();
+        String testBaseDir = sCurrentDir + "/" + testdir;
+        ArrayList<File> files = FileFinder.find(new File(testBaseDir + "/a"));
+        assertThat(files.size()   , is(4));
+        assertThat(files.get(0), is(new File(testBaseDir + "/a/b/c/1.txt")));
+        assertThat(files.get(1), is(new File(testBaseDir + "/a/b/c/2.txt")));
+        assertThat(files.get(2), is(new File(testBaseDir + "/a/b/1.txt")));
+        assertThat(files.get(3), is(new File(testBaseDir + "/a/b/2.txt")));
+    }
 
 }

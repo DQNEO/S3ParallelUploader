@@ -26,7 +26,7 @@ public class Uploader {
     private static int count_success = 0;
     private static int count_failure = 0;
 
-	private static Timer timer;
+    private static Timer timer;
 
 
     /**
@@ -35,34 +35,34 @@ public class Uploader {
      */
     public static void main(String[] args) throws Exception {
 
-    	File baseDir = checkBaseDir(args[0]);
+        File baseDir = checkBaseDir(args[0]);
 
-	    if (args.length < 2 ||   args[1] == "") {
-	    	throw new IllegalArgumentException("bucketName is not given");
-	    }
+        if (args.length < 2 ||   args[1] == "") {
+            throw new IllegalArgumentException("bucketName is not given");
+        }
 
-	    String bucketName = args[1];
+        String bucketName = args[1];
 
         s3 = new AmazonS3Client(new PropertiesCredentials(
-        		Uploader.class
+                Uploader.class
                         .getResourceAsStream("../sample/AwsCredentials.properties")));
 
         s3.setEndpoint(endpoint);
 
 
-		ArrayList<File> files = FileFinder.find(baseDir);
-		System.out.printf("===== [%d] files foud ========\n", files.size());
+        ArrayList<File> files = FileFinder.find(baseDir);
+        System.out.printf("===== [%d] files foud ========\n", files.size());
 
-		uploadFiles(bucketName, baseDir, files);
-		end(files.size());
+        uploadFiles(bucketName, baseDir, files);
+        end(files.size());
     }
 
     private static File checkBaseDir(String path) throws Exception {
-    	File dir  =new File(path);
-    	if (!  dir.isDirectory()) {
-    		throw new Exception("directory not found:" + path);
-    	}
-    	return dir;
+        File dir  =new File(path);
+        if (!  dir.isDirectory()) {
+            throw new Exception("directory not found:" + path);
+        }
+        return dir;
     }
 
     public static void uploadFiles(String bucketName, File baseDir, ArrayList<File> files) throws Exception {
@@ -73,10 +73,10 @@ public class Uploader {
         int index = 1;
         for(File file :files) {
             tasks.add(new Task(new UploadableFile(s3, bucketName, baseDir, file), index++));
-		}
+        }
 
-		System.out.println("===== Start uploading ========");
-		timer = new Timer();
+        System.out.println("===== Start uploading ========");
+        timer = new Timer();
 
         ExecutorService threadPool = Executors.newFixedThreadPool(NUM_THREADS);
 
@@ -85,27 +85,27 @@ public class Uploader {
 
         for (Future<Boolean> fut : list) {
             if(fut.get()) {
-            	count_success++;
+                count_success++;
             } else {
-            	count_failure++;
+                count_failure++;
             }
         }
         threadPool.shutdown();
 
     }
 
-	/**
-	 * @param countFiles
-	 */
-	public static void end(int countFiles) {
-		long elapsedTime = timer.getElapsedTime();
+    /**
+    * @param countFiles
+    */
+    public static void end(int countFiles) {
+        long elapsedTime = timer.getElapsedTime();
 
         System.out.println("Number of threas - "    + NUM_THREADS);
-    	System.out.println("TOTAL SUCCESS - " + count_success);
+        System.out.println("TOTAL SUCCESS - " + count_success);
         System.out.println("TOTAL FAILURE - " + count_failure);
         System.out.println("Total time - "    + elapsedTime + " ms");
         System.out.println("Millsec per file - " + ( elapsedTime / countFiles));
-	}
+    }
 
 }
 
