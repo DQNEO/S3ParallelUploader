@@ -1,4 +1,4 @@
-package jp.dqneo.amazons3.sample;
+package jp.dqneo.amazons3;
 
 import static org.junit.Assert.*;
 import jp.dqneo.amazons3.Timer;

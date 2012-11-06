@@ -1,4 +1,4 @@
-package jp.dqneo.amazons3.sample;
+package jp.dqneo.amazons3;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
