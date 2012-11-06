@@ -1,5 +1,8 @@
 package jp.dqneo.amazons3;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
@@ -21,13 +24,34 @@ public class CLI {
     /**
      * @param args
      *    baseDir : "c:\path\to\dir" ,
-     *    targetDir "s3://path/to/dir/"
+     *    targetDir "s3://yourbucketname/to/dir/"
      * @example
-     *     -v -t 100  c:\path\to\dir s3://path/to/dir/
+     *     -v -t 100  c:\path\to\dir s3://yourbucketname/to/dir/
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
 
+        String str = "2009year";
+
+        String regex = "(\\d+)(y)";
+        Pattern p1 = Pattern.compile(regex);
+
+        Matcher m = p1.matcher(str);
+
+        if (m.find()){
+            int start = m.start();
+            int end = m.end();
+            System.out.println("whole:" + m.group());
+            for (int i = 1 ; i <= m.groupCount(); i ++){
+                System.out.println("[Group" + i + "] " + m.group(i));
+            }
+        }else{
+            System.out.println("× " + str);
+        }
+
+
+
+        System.exit(0);
         int numThreads = 0;
         try {
             Options opt = new Options();
