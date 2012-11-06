@@ -27,6 +27,9 @@ public class CLI {
      *    targetDir "s3://yourbucketname/to/dir/"
      * @example
      *     -v -t 100  c:\path\to\dir s3://yourbucketname/to/dir/
+     *
+     * in advance, you must set 2 system environment variables
+     * "AWS_ACCESS_KEY_ID" and "AWS_SECRET_KEY"
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
