@@ -3,7 +3,7 @@ package jp.dqneo.amazons3;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.amazonaws.auth.PropertiesCredentials;
+import com.amazonaws.auth.EnvironmentVariableCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 
@@ -75,9 +75,7 @@ public class CLI {
 
         System.out.println(localDir +" , "+ bucket +" , "+ targetDir +" , "+ numThreads);
 
-        AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
-                Uploader.class
-                        .getResourceAsStream("AwsCredentials.properties")));
+        AmazonS3 s3 = new AmazonS3Client(new EnvironmentVariableCredentialsProvider());
 
         s3.setEndpoint(endpoint);
 

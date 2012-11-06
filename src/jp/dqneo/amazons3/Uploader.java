@@ -52,9 +52,7 @@ public class Uploader {
         ArrayList<File> files = FileFinder.find(localDir);
         System.out.printf("===== [%d] files foud ========\n", files.size());
 
-
         Collection<Task> tasks = new ArrayList<Task>();
-
 
         int index = 1;
         for(File file :files) {
