@@ -30,7 +30,7 @@ public class CLI {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        int numThreads = 0;
+        int numThreads = 1;
 
         try {
             Options opt = new Options();
