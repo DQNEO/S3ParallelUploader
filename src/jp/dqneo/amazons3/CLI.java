@@ -30,29 +30,8 @@ public class CLI {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-
-        String str = "2009year";
-
-        String regex = "(\\d+)(y)";
-        Pattern p1 = Pattern.compile(regex);
-
-        Matcher m = p1.matcher(str);
-
-        if (m.find()){
-            int start = m.start();
-            int end = m.end();
-            System.out.println("whole:" + m.group());
-            for (int i = 1 ; i <= m.groupCount(); i ++){
-                System.out.println("[Group" + i + "] " + m.group(i));
-            }
-        }else{
-            System.out.println("× " + str);
-        }
-
-
-
-        System.exit(0);
         int numThreads = 0;
+
         try {
             Options opt = new Options();
 
@@ -89,12 +68,12 @@ public class CLI {
         }
 
         String localDir = args[0];
-        String bucketName = args[1];
-        String targetDir = "";
+        String remotePath = args[1];
+        String strs[] = parseS3path(remotePath);
+        String bucket = strs[0];
+        String targetDir = strs[1];
 
-
-        System.out.println(localDir +" , "+ bucketName +" , "+ numThreads);
-        System.exit(0);
+        System.out.println(localDir +" , "+ bucket +" , "+ targetDir +" , "+ numThreads);
 
         AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
                 Uploader.class
@@ -102,8 +81,30 @@ public class CLI {
 
         s3.setEndpoint(endpoint);
 
-        Uploader uploader = new Uploader(s3, localDir, bucketName, targetDir, numThreads);
+        Uploader uploader = new Uploader(s3, localDir, bucket, targetDir, numThreads);
         uploader.upload();
     }
+
+    public static String[] parseS3path(String str) throws IllegalArgumentException {
+        String[] ret = {"",""};
+        String regex = "s3://([^/]+)/(.+)";
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher m = pattern.matcher(str);
+
+        if (m.find()){
+            ret[0] = m.group(1);
+            ret[1] = m.group(2);
+            if (!ret[1].endsWith("/")) {
+                ret[1] += "/";
+            }
+        } else {
+            throw new IllegalArgumentException("bad URL:" + str);
+        }
+
+        return ret;
+
+    }
+
 
 }

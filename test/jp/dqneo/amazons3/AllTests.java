@@ -9,6 +9,7 @@ import org.junit.runners.Suite.SuiteClasses;
     FileFinderTest.class,
     TimerTest.class,
     UploadableFileTest.class,
+    CLITest.class,
 
 })
 public class AllTests {

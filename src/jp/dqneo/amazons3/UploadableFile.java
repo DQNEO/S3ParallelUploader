@@ -33,10 +33,11 @@ public class UploadableFile extends File {
         this.bucket = bucket;
 
         if (targetDir == null) {
-            this.targetDir = "";
+            targetDir = "";
         } else if (! targetDir.endsWith("/")) {
-            this.targetDir = targetDir + "/";
+            targetDir += "/";
         }
+        this.targetDir = targetDir;
     }
 
     public String getS3Key() {
