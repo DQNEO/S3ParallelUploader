@@ -64,11 +64,12 @@ public class CLI {
             throw new IllegalArgumentException("target directory is not given");
         }
 
-        String baseDir = args[0];
+        String localDir = args[0];
         String bucketName = args[1];
+        String targetDir = "";
 
 
-        System.out.println(baseDir +" , "+ bucketName +" , "+ numThreads);
+        System.out.println(localDir +" , "+ bucketName +" , "+ numThreads);
         System.exit(0);
 
         AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
@@ -77,8 +78,8 @@ public class CLI {
 
         s3.setEndpoint(endpoint);
 
-        Uploader uploader = new Uploader(s3, bucketName, baseDir, numThreads);
-        uploader.uploadFiles();
+        Uploader uploader = new Uploader(s3, localDir, bucketName, targetDir, numThreads);
+        uploader.upload();
     }
 
 }

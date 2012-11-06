@@ -21,7 +21,9 @@ public class Uploader {
 
     private String bucketName;
 
-    private File baseDir;
+    private File localDir;
+
+    private String targetDir;
 
     private static int count_success = 0;
     private static int count_failure = 0;
@@ -29,10 +31,11 @@ public class Uploader {
     private static Timer timer;
 
 
-    public Uploader(AmazonS3 s3, String bucketName, String baseDir, int numThreads) throws Exception {
+    public Uploader(AmazonS3 s3, String localDir,  String bucketName,  String targetDir, int numThreads) throws Exception {
         this.s3 = s3;
         this.bucketName = bucketName;
-        this.baseDir = checkBaseDir(baseDir);
+        this.localDir = checkBaseDir(localDir);
+        this.targetDir = targetDir;
         this.numThreads = numThreads;
     }
 
@@ -44,9 +47,9 @@ public class Uploader {
         return dir;
     }
 
-    public void uploadFiles() throws Exception {
+    public void upload() throws Exception {
 
-        ArrayList<File> files = FileFinder.find(baseDir);
+        ArrayList<File> files = FileFinder.find(localDir);
         System.out.printf("===== [%d] files foud ========\n", files.size());
 
 
@@ -55,7 +58,7 @@ public class Uploader {
 
         int index = 1;
         for(File file :files) {
-            tasks.add(new Task(new UploadableFile(s3, bucketName, baseDir, file), index++));
+            tasks.add(new Task(new UploadableFile(s3, localDir, file,  bucketName, targetDir), index++));
         }
 
         System.out.println("===== Start uploading ========");

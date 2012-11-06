@@ -92,20 +92,25 @@ public class UploadableFileTest {
 
     @Test
     public void test() {
-        UploadableFile myFile1 = new UploadableFile(null, null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\foo\\file.txt"));
-        assertThat(myFile1.getS3Key(), is("foo/file.txt"));
+        UploadableFile myFile;
 
-        UploadableFile myFile2 = new UploadableFile(null, null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\bar\\file.txt"));
-        assertThat(myFile2.getS3Key(), is("bar/file.txt"));
+        myFile = new UploadableFile(null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\foo\\file.txt"),"mybucket",null);
+        assertThat(myFile.getS3Key(), is("foo/file.txt"));
 
-        UploadableFile myFile3 = new UploadableFile(null, null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\file.txt"));
-        assertThat(myFile3.getS3Key(), is("file.txt"));
-    }
+        myFile = new UploadableFile(null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\bar\\file.txt"),"mybucket",null);
+        assertThat(myFile.getS3Key(), is("bar/file.txt"));
+
+        myFile = new UploadableFile(null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\file.txt"),"mybucket",null);
+        assertThat(myFile.getS3Key(), is("file.txt"));
+
+        myFile = new UploadableFile(null, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\file.txt"),"mybucket", "target");
+        assertThat(myFile.getS3Key(), is("target/file.txt"));
+}
 
     @Test
     public void upload() {
         FakeAmazonS3 fakeAmazonS3 = new FakeAmazonS3();
-        UploadableFile uploadableFile = new UploadableFile(fakeAmazonS3, "a", new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\foo\\file.txt"));
+        UploadableFile uploadableFile = new UploadableFile(fakeAmazonS3, new File("c:\\tmp\basedir"), new File("c:\\tmp\basedir\\foo\\file.txt"),null,null);
         assertThat(fakeAmazonS3.hasPutObjectRequest, is(false));
 
         uploadableFile.upload();
