@@ -38,9 +38,9 @@ public class CLI {
         try {
             Options opt = new Options();
 
-            opt.addOption("h", false, "Print help");
+            opt.addOption("h", false, "print help");
             opt.addOption("t", true, "number of threads");
-            //opt.addOption("v", true, "The username to use");
+            opt.addOption("v", false, "verbose");
 
             BasicParser parser = new BasicParser();
             CommandLine cl = parser.parse(opt, args);
@@ -51,6 +51,9 @@ public class CLI {
                 System.exit(1);
             }
 
+            if ( cl.hasOption('v') ) {
+                Logger.setVerbose(true);
+            }
             if (cl.hasOption('t')) {
                 numThreads = Integer.parseInt(cl.getOptionValue('t'));
                 if (numThreads < 1) {
@@ -76,7 +79,7 @@ public class CLI {
         String bucket = strs[0];
         String targetDir = strs[1];
 
-        System.out.println(localDir +" , "+ bucket +" , "+ targetDir +" , "+ numThreads);
+        Logger.log(localDir +" , "+ bucket +" , "+ targetDir +" , "+ numThreads);
 
         AmazonS3 s3 = new AmazonS3Client(new EnvironmentVariableCredentialsProvider());
 

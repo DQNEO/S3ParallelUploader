@@ -50,7 +50,7 @@ public class Uploader {
     public void upload() throws Exception {
 
         ArrayList<File> files = FileFinder.find(localDir);
-        System.out.printf("===== [%d] files foud ========\n", files.size());
+        Logger.printf("===== [%d] files foud ========\n", files.size());
 
         Collection<Task> tasks = new ArrayList<Task>();
 
@@ -59,7 +59,7 @@ public class Uploader {
             tasks.add(new Task(new UploadableFile(s3, localDir, file,  bucketName, targetDir), index++));
         }
 
-        System.out.println("===== Start uploading ========");
+        Logger.log("===== Start uploading ========");
         timer = new Timer();
 
         ExecutorService threadPool = Executors.newFixedThreadPool(numThreads);
@@ -85,11 +85,11 @@ public class Uploader {
     public void end(int countFiles) {
         long elapsedTime = timer.getElapsedTime();
 
-        System.out.println("Number of threas - "    + numThreads);
-        System.out.println("TOTAL SUCCESS - " + count_success);
-        System.out.println("TOTAL FAILURE - " + count_failure);
-        System.out.println("Total time - "    + elapsedTime + " ms");
-        System.out.println("Millsec per file - " + ( elapsedTime / countFiles));
+        Logger.log("Number of threas - "    + numThreads);
+        Logger.log("TOTAL SUCCESS - " + count_success);
+        Logger.log("TOTAL FAILURE - " + count_failure);
+        Logger.log("Total time - "    + elapsedTime + " ms");
+        Logger.log("Millsec per file - " + ( elapsedTime / countFiles));
     }
 
 }
