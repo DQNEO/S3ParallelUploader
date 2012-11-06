@@ -16,8 +16,6 @@ class Regex {
         Matcher m = p1.matcher(str);
 
         if (m.find()){
-            int start = m.start();
-            int end = m.end();
             System.out.println("whole:" + m.group());
             for (int i = 1 ; i <= m.groupCount(); i ++){
                 System.out.println("[Group" + i + "] " + m.group(i));
