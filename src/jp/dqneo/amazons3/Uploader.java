@@ -41,7 +41,7 @@ public class Uploader {
     }
 
     /**
-     * @param args basedir , bucketName
+     * @param args baseDir , targetDir
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
