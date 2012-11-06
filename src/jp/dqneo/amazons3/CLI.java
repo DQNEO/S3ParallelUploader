@@ -20,6 +20,7 @@ import org.apache.commons.cli.ParseException;
 public class CLI {
 
     static private String endpoint = "https://s3-ap-northeast-1.amazonaws.com";
+    private static String VERSION ="2012-11-06T20:34";
 
     /**
      * @param args
@@ -41,6 +42,7 @@ public class CLI {
             opt.addOption("h", false, "print help");
             opt.addOption("t", true, "number of threads");
             opt.addOption("v", false, "verbose");
+            opt.addOption("V", false, "version");
 
             BasicParser parser = new BasicParser();
             CommandLine cl = parser.parse(opt, args);
@@ -48,6 +50,11 @@ public class CLI {
             if ( cl.hasOption('h') ) {
                 HelpFormatter f = new HelpFormatter();
                 f.printHelp("OptionsTip", opt);
+                System.exit(1);
+            }
+
+            if ( cl.hasOption('V') ) {
+                System.out.println("version:" + VERSION);
                 System.exit(1);
             }
 
