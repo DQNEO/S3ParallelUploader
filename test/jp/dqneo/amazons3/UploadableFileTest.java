@@ -20,6 +20,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.AmazonWebServiceRequest;
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.S3ClientOptions;
 import com.amazonaws.services.s3.S3ResponseMetadata;
 import com.amazonaws.services.s3.model.AbortMultipartUploadRequest;
 import com.amazonaws.services.s3.model.AccessControlList;
@@ -69,6 +70,7 @@ import com.amazonaws.services.s3.model.PartListing;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.Region;
+import com.amazonaws.services.s3.model.RestoreObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.SetBucketAclRequest;
 import com.amazonaws.services.s3.model.SetBucketLoggingConfigurationRequest;
@@ -764,6 +766,30 @@ class FakeAmazonS3 implements AmazonS3 {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
+
+	@Override
+	public void setRegion(com.amazonaws.regions.Region region) throws IllegalArgumentException {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	@Override
+	public void setS3ClientOptions(S3ClientOptions clientOptions) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	@Override
+	public void restoreObject(RestoreObjectRequest copyGlacierObjectRequest) throws AmazonServiceException {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	@Override
+	public void restoreObject(String bucketName, String key, int expirationInDays) throws AmazonServiceException {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
 
 
 }
