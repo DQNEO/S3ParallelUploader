@@ -20,6 +20,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.AmazonWebServiceRequest;
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.S3ClientOptions;
 import com.amazonaws.services.s3.S3ResponseMetadata;
 import com.amazonaws.services.s3.model.AbortMultipartUploadRequest;
 import com.amazonaws.services.s3.model.AccessControlList;
@@ -69,6 +70,7 @@ import com.amazonaws.services.s3.model.PartListing;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.Region;
+import com.amazonaws.services.s3.model.RestoreObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.SetBucketAclRequest;
 import com.amazonaws.services.s3.model.SetBucketLoggingConfigurationRequest;
@@ -123,20 +125,20 @@ class FakeAmazonS3 implements AmazonS3 {
 
     public boolean hasPutObjectRequest = false;
 
-    @Override
+    
     public PutObjectResult putObject(PutObjectRequest putObjectRequest)
             throws AmazonClientException, AmazonServiceException {
         hasPutObjectRequest = true;
         return null;
     }
 
-    @Override
+    
     public void setEndpoint(String endpoint) {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void changeObjectStorageClass(String bucketName, String key,
             StorageClass newStorageClass) throws AmazonClientException,
             AmazonServiceException {
@@ -144,7 +146,7 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public void setObjectRedirectLocation(String bucketName, String key,
             String newRedirectLocation) throws AmazonClientException,
             AmazonServiceException {
@@ -152,28 +154,28 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public ObjectListing listObjects(String bucketName)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public ObjectListing listObjects(String bucketName, String prefix)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public ObjectListing listObjects(ListObjectsRequest listObjectsRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public ObjectListing listNextBatchOfObjects(
             ObjectListing previousObjectListing) throws AmazonClientException,
             AmazonServiceException {
@@ -181,14 +183,14 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public VersionListing listVersions(String bucketName, String prefix)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public VersionListing listNextBatchOfVersions(
             VersionListing previousVersionListing)
             throws AmazonClientException, AmazonServiceException {
@@ -196,7 +198,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public VersionListing listVersions(String bucketName, String prefix,
             String keyMarker, String versionIdMarker, String delimiter,
             Integer maxResults) throws AmazonClientException,
@@ -205,49 +207,49 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public VersionListing listVersions(ListVersionsRequest listVersionsRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public Owner getS3AccountOwner() throws AmazonClientException,
             AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public boolean doesBucketExist(String bucketName)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return false;
     }
 
-    @Override
+    
     public List<Bucket> listBuckets() throws AmazonClientException,
             AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public List<Bucket> listBuckets(ListBucketsRequest listBucketsRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public String getBucketLocation(String bucketName)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public String getBucketLocation(
             GetBucketLocationRequest getBucketLocationRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -255,42 +257,42 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public Bucket createBucket(CreateBucketRequest createBucketRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public Bucket createBucket(String bucketName) throws AmazonClientException,
             AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public Bucket createBucket(String bucketName, Region region)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public Bucket createBucket(String bucketName, String region)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public AccessControlList getObjectAcl(String bucketName, String key)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public AccessControlList getObjectAcl(String bucketName, String key,
             String versionId) throws AmazonClientException,
             AmazonServiceException {
@@ -298,7 +300,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public void setObjectAcl(String bucketName, String key,
             AccessControlList acl) throws AmazonClientException,
             AmazonServiceException {
@@ -306,7 +308,7 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public void setObjectAcl(String bucketName, String key,
             CannedAccessControlList acl) throws AmazonClientException,
             AmazonServiceException {
@@ -314,7 +316,7 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public void setObjectAcl(String bucketName, String key, String versionId,
             AccessControlList acl) throws AmazonClientException,
             AmazonServiceException {
@@ -322,7 +324,7 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public void setObjectAcl(String bucketName, String key, String versionId,
             CannedAccessControlList acl) throws AmazonClientException,
             AmazonServiceException {
@@ -330,21 +332,21 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public AccessControlList getBucketAcl(String bucketName)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public void setBucketAcl(SetBucketAclRequest setBucketAclRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public AccessControlList getBucketAcl(
             GetBucketAclRequest getBucketAclRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -352,28 +354,28 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public void setBucketAcl(String bucketName, AccessControlList acl)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void setBucketAcl(String bucketName, CannedAccessControlList acl)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public ObjectMetadata getObjectMetadata(String bucketName, String key)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public ObjectMetadata getObjectMetadata(
             GetObjectMetadataRequest getObjectMetadataRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -381,21 +383,21 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public S3Object getObject(String bucketName, String key)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public S3Object getObject(GetObjectRequest getObjectRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public ObjectMetadata getObject(GetObjectRequest getObjectRequest,
             File destinationFile) throws AmazonClientException,
             AmazonServiceException {
@@ -403,14 +405,14 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public void deleteBucket(DeleteBucketRequest deleteBucketRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void deleteBucket(String bucketName) throws AmazonClientException,
             AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
@@ -418,14 +420,14 @@ class FakeAmazonS3 implements AmazonS3 {
     }
 
 
-    @Override
+    
     public PutObjectResult putObject(String bucketName, String key, File file)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public PutObjectResult putObject(String bucketName, String key,
             InputStream input, ObjectMetadata metadata)
             throws AmazonClientException, AmazonServiceException {
@@ -433,7 +435,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public CopyObjectResult copyObject(String sourceBucketName,
             String sourceKey, String destinationBucketName,
             String destinationKey) throws AmazonClientException,
@@ -442,35 +444,35 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public CopyObjectResult copyObject(CopyObjectRequest copyObjectRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public CopyPartResult copyPart(CopyPartRequest copyPartRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public void deleteObject(String bucketName, String key)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void deleteObject(DeleteObjectRequest deleteObjectRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public DeleteObjectsResult deleteObjects(
             DeleteObjectsRequest deleteObjectsRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -478,21 +480,21 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public void deleteVersion(String bucketName, String key, String versionId)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void deleteVersion(DeleteVersionRequest deleteVersionRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public BucketLoggingConfiguration getBucketLoggingConfiguration(
             String bucketName) throws AmazonClientException,
             AmazonServiceException {
@@ -500,7 +502,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public void setBucketLoggingConfiguration(
             SetBucketLoggingConfigurationRequest setBucketLoggingConfigurationRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -508,7 +510,7 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public BucketVersioningConfiguration getBucketVersioningConfiguration(
             String bucketName) throws AmazonClientException,
             AmazonServiceException {
@@ -516,7 +518,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public void setBucketVersioningConfiguration(
             SetBucketVersioningConfigurationRequest setBucketVersioningConfigurationRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -524,67 +526,67 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public BucketLifecycleConfiguration getBucketLifecycleConfiguration(
             String bucketName) {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public void setBucketLifecycleConfiguration(String bucketName,
             BucketLifecycleConfiguration bucketLifecycleConfiguration) {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void deleteBucketLifecycleConfiguration(String bucketName) {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public BucketCrossOriginConfiguration getBucketCrossOriginConfiguration(
             String bucketName) {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public void setBucketCrossOriginConfiguration(String bucketName,
             BucketCrossOriginConfiguration bucketCrossOriginConfiguration) {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void deleteBucketCrossOriginConfiguration(String bucketName) {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public BucketTaggingConfiguration getBucketTaggingConfiguration(
             String bucketName) {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public void setBucketTaggingConfiguration(String bucketName,
             BucketTaggingConfiguration bucketTaggingConfiguration) {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void deleteBucketTaggingConfiguration(String bucketName) {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public BucketNotificationConfiguration getBucketNotificationConfiguration(
             String bucketName) throws AmazonClientException,
             AmazonServiceException {
@@ -592,7 +594,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public void setBucketNotificationConfiguration(String bucketName,
             BucketNotificationConfiguration bucketNotificationConfiguration)
             throws AmazonClientException, AmazonServiceException {
@@ -600,7 +602,7 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public BucketWebsiteConfiguration getBucketWebsiteConfiguration(
             String bucketName) throws AmazonClientException,
             AmazonServiceException {
@@ -608,7 +610,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public BucketWebsiteConfiguration getBucketWebsiteConfiguration(
             GetBucketWebsiteConfigurationRequest getBucketWebsiteConfigurationRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -616,7 +618,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public void setBucketWebsiteConfiguration(String bucketName,
             BucketWebsiteConfiguration configuration)
             throws AmazonClientException, AmazonServiceException {
@@ -624,7 +626,7 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public void setBucketWebsiteConfiguration(
             SetBucketWebsiteConfigurationRequest setBucketWebsiteConfigurationRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -632,14 +634,14 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public void deleteBucketWebsiteConfiguration(String bucketName)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void deleteBucketWebsiteConfiguration(
             DeleteBucketWebsiteConfigurationRequest deleteBucketWebsiteConfigurationRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -647,14 +649,14 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public BucketPolicy getBucketPolicy(String bucketName)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public BucketPolicy getBucketPolicy(
             GetBucketPolicyRequest getBucketPolicyRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -662,28 +664,28 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public void setBucketPolicy(String bucketName, String policyText)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void setBucketPolicy(SetBucketPolicyRequest setBucketPolicyRequest)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void deleteBucketPolicy(String bucketName)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public void deleteBucketPolicy(
             DeleteBucketPolicyRequest deleteBucketPolicyRequest)
             throws AmazonClientException, AmazonServiceException {
@@ -691,21 +693,21 @@ class FakeAmazonS3 implements AmazonS3 {
 
     }
 
-    @Override
+    
     public URL generatePresignedUrl(String bucketName, String key,
             Date expiration) throws AmazonClientException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public URL generatePresignedUrl(String bucketName, String key,
             Date expiration, HttpMethod method) throws AmazonClientException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public URL generatePresignedUrl(
             GeneratePresignedUrlRequest generatePresignedUrlRequest)
             throws AmazonClientException {
@@ -713,7 +715,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public InitiateMultipartUploadResult initiateMultipartUpload(
             InitiateMultipartUploadRequest request)
             throws AmazonClientException, AmazonServiceException {
@@ -721,28 +723,28 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public UploadPartResult uploadPart(UploadPartRequest request)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public PartListing listParts(ListPartsRequest request)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
 
-    @Override
+    
     public void abortMultipartUpload(AbortMultipartUploadRequest request)
             throws AmazonClientException, AmazonServiceException {
         // TODO 自動生成されたメソッド・スタブ
 
     }
 
-    @Override
+    
     public CompleteMultipartUploadResult completeMultipartUpload(
             CompleteMultipartUploadRequest request)
             throws AmazonClientException, AmazonServiceException {
@@ -750,7 +752,7 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public MultipartUploadListing listMultipartUploads(
             ListMultipartUploadsRequest request) throws AmazonClientException,
             AmazonServiceException {
@@ -758,12 +760,36 @@ class FakeAmazonS3 implements AmazonS3 {
         return null;
     }
 
-    @Override
+    
     public S3ResponseMetadata getCachedResponseMetadata(
             AmazonWebServiceRequest request) {
         // TODO 自動生成されたメソッド・スタブ
         return null;
     }
+
+	
+	public void setRegion(com.amazonaws.regions.Region region) throws IllegalArgumentException {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	
+	public void setS3ClientOptions(S3ClientOptions clientOptions) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	
+	public void restoreObject(RestoreObjectRequest copyGlacierObjectRequest) throws AmazonServiceException {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	
+	public void restoreObject(String bucketName, String key, int expirationInDays) throws AmazonServiceException {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
 
 
 }

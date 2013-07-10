@@ -34,7 +34,6 @@ public class FileFinder {
 
         File[] listFiles = file.listFiles(new FilenameFilter() {
 
-            @Override
             public boolean accept(File dir, String name) {
                 // exclude dot files
                 if (name.startsWith(".")) {

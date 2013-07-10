@@ -12,7 +12,6 @@ public class Task implements Callable<Boolean> {
         this.index = index;
     }
 
-    @Override
     public Boolean call() {
         file.upload();
         Logger.printf("[%d] %s <= %s\n",  index, file.getS3Key(), file.getAbsolutePath());
