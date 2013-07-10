@@ -90,7 +90,6 @@ class MyTask implements Callable<Boolean> {
         this.key = key;
     }
 
-    @Override
     public Boolean call() {
         try {
             AmazonS3 s3 = new AmazonS3Client(new PropertiesCredentials(
