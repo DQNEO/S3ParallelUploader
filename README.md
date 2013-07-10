@@ -18,11 +18,22 @@ http://dev.classmethod.jp/cloud/amazon-s3-java-util-concurrent-file-upload/
 
 ## 
 
-## Requirement
+## Insatll
 
+### add AWS SDK for Java
 This tool requires AWS SDK for Java.
 
 see http://aws.amazon.com/sdkforjava
+
+### add Apache Commons CLI (commonc-cli-1.2.jar)
+
+This project contains commonc-cli-1.2.jar in the extlib directory.
+
+* Build Path > Configure build path > Add Jars 
+* specify extlib/commons-cli-1.2/commonc-cli-1.2.jar
+
+
+
 ## Liscence
 
 MIT Liscence
